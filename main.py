@@ -6,7 +6,6 @@ import os
 import urllib.request
 
 print("Remove file")
-os.remove("xgc_jlib")
 
 
 print("Path at terminal when executing this file")
