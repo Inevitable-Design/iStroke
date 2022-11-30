@@ -11,3 +11,4 @@ Werkzeug==2.2.2
 joblib
 numpy
 urllib3
+uvicorn
