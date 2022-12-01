@@ -4,6 +4,7 @@ from flask_restful import Resource, Api
 import numpy as np
 import os
 import urllib.request
+import pymongo
 
 print("Remove file")
 
