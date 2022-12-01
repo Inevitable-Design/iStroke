@@ -43,6 +43,19 @@ app = Flask(__name__)
 api = Api(app)
 
 
+def mongoadd(emp_rec1):
+    conn = pymongo.MongoClient("mongodb://mongo:0eP146Tsl8ef79RHnsTx@containers-us-west-140.railway.app:5537")
+    print("Connected successfully!!!")
+
+    # database
+    db = conn.database
+
+    # Created or Switched to collection names: iStroke_main
+    collection = db.iStroke_main
+
+    # Insert Data
+    rec_id1 = collection.insert_one(emp_rec1)
+
 def encode_hypertension(hypertension):
     if hypertension == 'yes':
         hypertension = 1
@@ -87,6 +100,25 @@ def data_fetch():
     get_heart_disease = str(request.args.get('heart_disease')).lower()
     get_married = str(request.args.get('married')).lower()
 
+    
+    # arrange data for databse
+    mongo_data = {
+            "name": "user1",
+            "age": age,
+            "Average_glucose_level": avg_glucose_level,
+            "Hypertension": get_hypertension,
+            "heart_disease": get_heart_disease,
+            "married": get_married,
+            "Residence_type": request.args.get('residence_type'),
+            "Gender": request.args.get('gender'),
+            "Work_type": request.args.get('work_type'),
+            "Residence_type": request.args.get('residence_type'),
+            "BMI": request.args.get('bmi'),
+            "Smoking_status": request.args.get('smoking_status'),
+    }
+    # add to database
+    mongoadd(mongo_data)
+    
     # Encode string values to int
     hypertension = encode_hypertension(get_hypertension)
     heart_disease = encode_heart_disease(get_heart_disease)
